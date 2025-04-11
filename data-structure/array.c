@@ -24,7 +24,7 @@ int main(void)
 		for (int j = 0; j < 3; j++)
 		{
 			printf("%d\n", array[i][j]);
-			printf("%p\n", (char *) array + (sizeof(int) * i) + (sizeof(int) * j));
+			printf("%p\n", (char *) array + sizeof(int) * (i * 3 + j));
 		}
 	}
 	printf("Size of array: %d\n", size);
