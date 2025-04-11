@@ -18,6 +18,7 @@
 int main(void)
 {
 	int array[2][3] = {1, 2, 3, 4, 5, 6};
+	int size = sizeof(array) / sizeof(array[0][0]); // Size equal row * column
 	for (int i = 0; i < 2; i++)
 	{
 		for (int j = 0; j < 3; j++)
@@ -26,6 +27,7 @@ int main(void)
 			printf("%p\n", (char *) array + (sizeof(int) * i) + (sizeof(int) * j));
 		}
 	}
+	printf("Size of array: %d\n", size);
 	return 0;
 }
 
