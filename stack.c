@@ -58,7 +58,7 @@ void push(stack *s, int data)
 void pop(stack *s)
 {
 	// Stack is empty
-	if (s->top == 0)
+	if (isEmpty(s))
 	{
 		printf("Stack is empty\n");
 		return;
