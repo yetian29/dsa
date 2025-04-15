@@ -70,6 +70,11 @@ void pop(stack *s)
 
 void peek(stack *s, int position)
 {
+	if (position < 0 || position >= size)
+	{
+		fprint(stderr, "Position outside range index of array\n");
+		exit(1);
+	}
   printf("%d\n", s->items[position]);
 }
 
