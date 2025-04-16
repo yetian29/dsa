@@ -94,6 +94,6 @@ int main(void)
 	dequeue(b);
 	dequeue(b);
 	out(b);
-	free(b);
+	freeQueue(b);
 	return 0;
 }
