@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #define capacity 5
-
-
 
 typedef struct 
 {
@@ -58,15 +57,14 @@ int main(void)
 	push(&s, 3);
 	push(&s, 4);
 	push(&s, 5);
-	/*push(&s, 6);*/
+	push(&s, 5);
 	out(&s);
 	pop(&s);
 	pop(&s);
 	pop(&s);
 	pop(&s);
 	pop(&s);
-	pop(&s);
+	/*pop(&s);*/
 	out(&s);
-
 	return 0;
 }
