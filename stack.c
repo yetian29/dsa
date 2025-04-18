@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #define size 5
+
 
 typedef struct
 {
@@ -24,6 +24,7 @@ void push(stack *s, int data)
 	}
 	s->top++;
 	s->items[s->top] = data;
+
 }
 
 void pop(stack *s)
@@ -35,6 +36,7 @@ void pop(stack *s)
 		exit(1);
 	}
 	s->top--;
+
 }
 
 void out(stack *s)
@@ -47,6 +49,7 @@ void out(stack *s)
 	printf("\n");
 }
 
+
 int main(void)
 {
 	stack s;
@@ -57,7 +60,7 @@ int main(void)
 	push(&s, 4);
 	push(&s, 5);
 	/*push(&s, 6);*/
-  out(&s);
+	out(&s);
 	pop(&s);
 	pop(&s);
 	pop(&s);
@@ -67,3 +70,4 @@ int main(void)
 	out(&s);
 	return 0;
 }
+
