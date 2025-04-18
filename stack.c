@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #define size 5
 
 
@@ -14,29 +15,37 @@ void initialize(stack *s)
 	s->top = -1;
 }
 
-void push(stack *s, int data)
+bool isFull(stack *s)
+{
+	return s->top == size - 1;
+}
+
+bool isEmpty(stack *s)
+{
+	return s->top == -1;
+}
+
+void push(stack *s, int x)
 {
 	// Stack is full
-	if (s->top == size - 1)
+	if (isFull(s))
 	{
 		fprintf(stderr, "Overflow\n");
 		exit(1);
 	}
 	s->top++;
-	s->items[s->top] = data;
-
+	s->items[s->top] = x;
 }
 
 void pop(stack *s)
 {
 	// Stack is empty
-	if (s->top == -1)
+	if (isEmpty(s))
 	{
 		fprintf(stderr, "Underflow\n");
 		exit(1);
 	}
 	s->top--;
-
 }
 
 void out(stack *s)
@@ -44,11 +53,10 @@ void out(stack *s)
 	for (int i = s->top; i >= 0; i--)
 	{
 		printf("%d", s->items[i]);
-		if (i > 0) printf(" | ");
+	  if (i > 0) printf(" | ");
 	}
 	printf("\n");
 }
-
 
 int main(void)
 {
@@ -70,4 +78,3 @@ int main(void)
 	out(&s);
 	return 0;
 }
-
