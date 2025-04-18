@@ -19,7 +19,7 @@ void initialize(queue *q)
 
 bool isFull(queue *q)
 {
-	return q->tail == size - 1;
+	return q->tail == size - 1 ;
 }
 
 bool isEmpty(queue *q)
@@ -29,13 +29,13 @@ bool isEmpty(queue *q)
 
 int enqueue(queue *q, int x)
 {
-	q->items[q->tail] = x;
 	if (isFull(q))
 	{
 		fprintf(stderr, "Overflow\n");
 		q->tail = 0;
 		return 1;
 	}	
+	q->items[q->tail] = x;
 	q->tail++;
 	return 0;
 }
@@ -78,7 +78,7 @@ int main(void)
 	dequeue(&q);
 	dequeue(&q);
 	dequeue(&q);
-	dequeue(&q);
+	/*dequeue(&q);*/
 	out(&q);
 	return 0;
 }
