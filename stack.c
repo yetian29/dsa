@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define capacity 5
+#define size 5
 
-typedef struct 
+typedef struct
 {
 	int top;
-	int items[capacity];
+	int items[size];
 } stack;
 
-void initializeStack(stack *s)
+void initialize(stack *s)
 {
 	s->top = -1;
 }
@@ -17,7 +17,7 @@ void initializeStack(stack *s)
 void push(stack *s, int data)
 {
 	// Stack is full
-	if (s->top == capacity - 1)
+	if (s->top == size - 1)
 	{
 		fprintf(stderr, "Overflow\n");
 		exit(1);
@@ -29,7 +29,7 @@ void push(stack *s, int data)
 void pop(stack *s)
 {
 	// Stack is empty
-	if (s->top < 0)
+	if (s->top == -1)
 	{
 		fprintf(stderr, "Underflow\n");
 		exit(1);
@@ -39,7 +39,6 @@ void pop(stack *s)
 
 void out(stack *s)
 {
-	printf("Top: %d\n", s->top);
 	for (int i = s->top; i >= 0; i--)
 	{
 		printf("%d", s->items[i]);
@@ -51,20 +50,20 @@ void out(stack *s)
 int main(void)
 {
 	stack s;
-	initializeStack(&s);
+	initialize(&s);
 	push(&s, 1);
 	push(&s, 2);
 	push(&s, 3);
 	push(&s, 4);
 	push(&s, 5);
-	push(&s, 5);
-	out(&s);
+	/*push(&s, 6);*/
+  out(&s);
 	pop(&s);
 	pop(&s);
 	pop(&s);
 	pop(&s);
 	pop(&s);
-	/*pop(&s);*/
+	pop(&s);
 	out(&s);
 	return 0;
 }
