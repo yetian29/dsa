@@ -74,6 +74,11 @@ int main(void)
 	enqueue(&q, 5);
 	enqueue(&q, 6);
 	dequeue(&q);
+	dequeue(&q);
+	dequeue(&q);
+	dequeue(&q);
+	enqueue(&q, 7);
+	/*dequeue(&q);*/
 	out(&q);
 
 }
