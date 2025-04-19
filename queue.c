@@ -1,18 +1,18 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
-#define size 5
+#include <stdbool.h>
+#define capacity 5
 
 
 int count = 0;
-
 
 typedef struct
 {
 	int head;
 	int tail;
-	int items[size];
+	int items[capacity];
 } queue;
+
 
 void initialize(queue *q)
 {
@@ -21,43 +21,58 @@ void initialize(queue *q)
 }
 
 
-void enqueue(queue *q, int x)
+bool isFull(queue *q)
 {
-	if ( (q->tail + 1) % size == q->head )
+	/*if (q->head == q->tail + 1  || q->head == 0 && q->tail == capacity - 1) return true;*/
+	return count == capacity - 1;
+}
+
+bool isEmpty(queue *q)
+{
+	/*return q->head == q->tail;*/
+	return count == 0;
+}
+
+
+void enqueue(queue*q, int x)
+{
+	if (isFull(q))
 	{
-		 fprintf(stderr, "Overflow\n");
-		 exit(1);
+		fprintf(stderr, "Overflow\n");
+		exit(1);
 	}
 	q->items[q->tail] = x;
-	q->tail = (q->tail + 1) % size;
+	q->tail = (q->tail + 1) % capacity;
 	count++;
 }
 
-void dequeue(queue *q)
+void dequeue(queue*q)
 {
-	if (q->head == q->tail)
+  if (isEmpty(q))
 	{
-		 fprintf(stderr, "Underflow\n");
-		 exit(1);
+		fprintf(stderr, "Underflow\n");
+		exit(1);
 	}
-	q->head = (q->head + 1) % size;
+	q->head = (q->head + 1) % capacity;
 	count--;
 }
 
+
 void out(queue *q)
 {
-	int i = 0;
-	int start = q->head;
 	printf("Head: %d, Tail: %d, Count: %d\n", q->head, q->tail, count);
-	while (i < count)
+	int i = q->head;
+	for (int j = 0; j < count; j++)
 	{
-		printf("%d", q->items[start]);
-		if (i < count - 1) printf(" | ");
-		i++;
-		start = (start + 1) % size;
+		printf("%d", q->items[i]);
+		if (j < count - 1) printf(" | ");
+		i = (i + 1) % capacity;
 	}
 	printf("\n");
+
 }
+
+
 
 int main(void)
 {
@@ -67,18 +82,16 @@ int main(void)
 	enqueue(&q, 2);
 	enqueue(&q, 3);
 	enqueue(&q, 4);
-	/*enqueue(&q, 5);*/
-	out(&q);
-	dequeue(&q);
 	dequeue(&q);
 	enqueue(&q, 5);
+	dequeue(&q);
 	enqueue(&q, 6);
-	dequeue(&q);
-	dequeue(&q);
-	dequeue(&q);
-	dequeue(&q);
-	enqueue(&q, 7);
-	/*dequeue(&q);*/
 	out(&q);
-
+	/*dequeue(&q);*/
+	/*dequeue(&q);*/
+	/*dequeue(&q);*/
+	/*dequeue(&q);*/
+	/*dequeue(&q);*/
+	/*out(&q);*/
+	return 0;
 }
