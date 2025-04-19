@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #define size 5
 
 
 int count = 0;
+
 
 typedef struct
 {
@@ -18,58 +20,41 @@ void initialize(queue *q)
 	q->tail = 0;
 }
 
-bool isFull(queue *q)
-{
-	return q->tail == size - 1;
-}
-
-bool isEmpty(queue *q)
-{
-	return q->head == q->tail;
-}
-
-
 
 void enqueue(queue *q, int x)
 {
+	if ( (q->tail + 1) % size == q->head )
+	{
+		 fprintf(stderr, "Overflow\n");
+		 exit(1);
+	}
 	q->items[q->tail] = x;
+	q->tail = (q->tail + 1) % size;
 	count++;
-	if (isFull(q))
-	{
-		q->tail = 0;
-	}
-	else
-	{
-		q->tail++;
-	}
 }
 
 void dequeue(queue *q)
 {
-	if (isEmpty(q))
+	if (q->head == q->tail)
 	{
-		q->head = 0;
+		 fprintf(stderr, "Underflow\n");
+		 exit(1);
 	}
-	else 
-	{
-		q->head++;
-		count--;
-	}
+	q->head = (q->head + 1) % size;
+	count--;
 }
 
 void out(queue *q)
 {
-	printf("Head: %d, Tail: %d\n", q->head, q->tail);
-	int i = q->head;
+	int i = 0;
+	int start = q->head;
+	printf("Head: %d, Tail: %d, Count: %d\n", q->head, q->tail, count);
 	while (i < count)
 	{
-		printf("%d", q->items[i]);
+		printf("%d", q->items[start]);
+		if (i < count - 1) printf(" | ");
 		i++;
-		if (i < count) printf(" | ");
-		if (i == size - 1)
-		{
-			i = 0;
-		}
+		start = (start + 1) % size;
 	}
 	printf("\n");
 }
@@ -82,8 +67,13 @@ int main(void)
 	enqueue(&q, 2);
 	enqueue(&q, 3);
 	enqueue(&q, 4);
+	/*enqueue(&q, 5);*/
+	out(&q);
+	dequeue(&q);
+	dequeue(&q);
 	enqueue(&q, 5);
 	enqueue(&q, 6);
+	dequeue(&q);
 	out(&q);
-	return 0;
+
 }
